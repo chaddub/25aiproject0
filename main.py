@@ -86,5 +86,13 @@ if user_mbti:
         for match in mbti_compatibility[user_mbti]:
             st.markdown(f"- 💖 {match}")
         
-        st.markdown("💑 *MBTI 궁합은 재미로 보*
+        st.markdown("💑 *MBTI 궁합은 재미로 보는 거예요~ 하지만 생각보다 잘 맞을지도?!* 😉")
+        st.balloons()  # 🎈 풍선 효과!
+    else:
+        st.error("😥 잘못된 MBTI입니다. 예: ENFP, ISTJ, INTP 등 올바르게 입력해주세요!")
+else:
+    st.info("📌 MBTI를 입력해보세요! 어떤 인연이 기다리고 있을까요? 💘")
 
+# 바닥글
+st.markdown("---")
+st.markdown("Made with 🧠 + ❤️ by Streamlit | 오늘도 인연을 찾아 떠나봅시다! 🌍")
