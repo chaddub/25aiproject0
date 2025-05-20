@@ -2,13 +2,26 @@ import streamlit as st
 
 st.set_page_config(page_title="MBTI 궁합 네온파티", layout="centered")
 
-# 💫 스타일 정의
+# 🌌 배경 + 스타일 추가
 st.markdown("""
     <style>
+        /* 전체 배경 애니메이션 */
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #000000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Segoe UI', sans-serif;
             color: white;
         }
+
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
         .title {
             font-size: 64px;
             font-weight: bold;
@@ -18,6 +31,7 @@ st.markdown("""
             animation: neon-pulse 1.5s infinite alternate;
             margin-top: 30px;
         }
+
         .subtitle {
             font-size: 24px;
             text-align: center;
@@ -25,67 +39,63 @@ st.markdown("""
             margin-bottom: 40px;
             animation: slide-in 1.2s ease-out;
         }
+
         .box {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
             border: 2px solid #0ff;
-            box-shadow: 0 0 15px #0ff;
+            box-shadow: 0 0 15px #0ff, 0 0 40px #ff00ff;
             animation: glow-fade 2s infinite alternate;
         }
+
         .header {
             font-size: 28px;
             color: #ff5df3;
             text-shadow: 0 0 10px #ff5df3;
             margin-bottom: 10px;
         }
+
         .mbti {
             font-size: 32px;
             font-weight: bold;
             color: #fff;
             text-shadow: 0 0 10px #0ff;
         }
+
         .match {
             font-size: 20px;
             margin: 10px 0;
             color: #9cf7ff;
             text-shadow: 0 0 5px #9cf7ff;
         }
-        input {
-            background-color: #222 !important;
-            color: #0ff !important;
-        }
+
         @keyframes neon-pulse {
-            from {
-                text-shadow: 0 0 5px #f0f, 0 0 10px #0ff;
-            }
-            to {
-                text-shadow: 0 0 20px #f0f, 0 0 40px #0ff, 0 0 60px #0ff;
-            }
+            from { text-shadow: 0 0 5px #f0f, 0 0 10px #0ff; }
+            to   { text-shadow: 0 0 20px #f0f, 0 0 40px #0ff, 0 0 60px #0ff; }
         }
+
         @keyframes slide-in {
-            0% {
-                transform: translateY(-30px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            0% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
         }
+
         @keyframes glow-fade {
-            0% {
-                box-shadow: 0 0 10px #0ff;
-            }
-            100% {
-                box-shadow: 0 0 25px #ff00ff;
-            }
+            0% { box-shadow: 0 0 10px #0ff; }
+            100% { box-shadow: 0 0 25px #ff00ff; }
+        }
+
+        /* 입력창 커스텀 */
+        input {
+            background-color: #111 !important;
+            color: #0ff !important;
+            border: 1px solid #0ff !important;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# 데이터
+# MBTI 데이터
 mbti_descriptions = {
     "INTJ": "전략가형 - 분석적이고 독립적인 사고를 가진 계획가.",
     "INTP": "논리사고형 - 호기심 많고 이론 중심적인 탐색자.",
@@ -125,18 +135,17 @@ mbti_compatibility = {
 }
 
 # 제목
-st.markdown('<div class="title">⚡ MBTI 궁합 네온 파티 ⚡</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">네온 속에서 반짝이는 당신과의 완벽한 궁합 찾기</div>', unsafe_allow_html=True)
+st.markdown('<div class="title">🌌 MBTI 궁합 네온 파티 🌌</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">움직이는 네온 속, 당신의 궁합을 밝혀드립니다!</div>', unsafe_allow_html=True)
 
 # 입력
-user_mbti = st.text_input("👉 당신의 MBTI를 입력하세요 (예: ENFP, ISTJ)", max_chars=4).upper()
+user_mbti = st.text_input("💡 당신의 MBTI를 입력해주세요 (예: ENFP, ISTJ)", max_chars=4).upper()
 
-# 출력
+# 결과 출력
 if user_mbti:
     if user_mbti in mbti_descriptions:
         st.markdown('<div class="box">', unsafe_allow_html=True)
-
-        st.markdown('<div class="header">🔮 당신의 성격</div>', unsafe_allow_html=True)
+        st.markdown('<div class="header">🧠 당신의 성격</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="mbti">{user_mbti}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="match">{mbti_descriptions[user_mbti]}</div>', unsafe_allow_html=True)
 
@@ -146,7 +155,6 @@ if user_mbti:
 
         st.markdown('</div>', unsafe_allow_html=True)
     else:
-        st.error("🚫 올바른 MBTI를 입력해주세요 (예: INFP, ENTP 등)")
+        st.error("🚫 유효한 MBTI를 입력해주세요 (예: INFP, ENTP 등)")
 else:
-    st.info("💬 MBTI를 입력하면 결과가 나타납니다.")
-
+    st.info("⌨️ MBTI를 입력하면 궁합이 반짝이며 나타납니다!")
