@@ -1,60 +1,60 @@
 import streamlit as st
 
-# 페이지 설정
-st.set_page_config(page_title="MBTI 궁합 분석기", layout="centered")
+# Streamlit 페이지 설정
+st.set_page_config(page_title="MBTI 궁합 매칭기", layout="centered")
 
-# 🎨 스타일 설정 (HTML + CSS)
+# 🔥 커스텀 CSS 적용
 st.markdown("""
     <style>
-        html, body {
-            background-color: #121212;
-            color: #ffffff;
+        body {
+            background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+            color: white;
             font-family: 'Segoe UI', sans-serif;
         }
         .title {
-            font-size: 48px;
-            font-weight: bold;
-            color: #00bfff;
+            font-size: 50px;
             text-align: center;
-            margin-bottom: 10px;
+            font-weight: bold;
+            color: #ff4c98;
+            text-shadow: 2px 2px 8px #00000088;
+            animation: pulse 2s infinite;
         }
         .subtitle {
             font-size: 20px;
             text-align: center;
-            color: #aaaaaa;
+            color: #dddddd;
             margin-bottom: 40px;
         }
         .box {
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0px 0px 10px #00bfff33;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px #00ffc3aa;
+            margin-bottom: 30px;
         }
         .header {
-            font-size: 22px;
-            color: #00bfff;
-            margin-bottom: 10px;
+            font-size: 26px;
+            color: #00ffe7;
+            margin-bottom: 15px;
         }
         .mbti {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: bold;
             color: #ffffff;
         }
         .match {
             font-size: 18px;
-            color: #dddddd;
+            color: #f3f3f3;
         }
-        .footer {
-            font-size: 14px;
-            color: #777;
-            text-align: center;
-            margin-top: 50px;
+        @keyframes pulse {
+            0% { text-shadow: 0 0 5px #ff4c98; }
+            50% { text-shadow: 0 0 20px #ff4c98; }
+            100% { text-shadow: 0 0 5px #ff4c98; }
         }
     </style>
 """, unsafe_allow_html=True)
 
-# MBTI 설명
+# 데이터
 mbti_descriptions = {
     "INTJ": "전략가형 - 분석적이고 독립적인 사고를 가진 계획가.",
     "INTP": "논리사고형 - 호기심 많고 이론 중심적인 탐색자.",
@@ -74,7 +74,6 @@ mbti_descriptions = {
     "ESFP": "연예인형 - 사교적이고 에너지 넘치는 분위기 메이커."
 }
 
-# MBTI 궁합 정보
 mbti_compatibility = {
     "INTJ": ["ENFP", "ENTP"],
     "INTP": ["INFJ", "ENFJ"],
@@ -95,30 +94,27 @@ mbti_compatibility = {
 }
 
 # 타이틀
-st.markdown('<div class="title">MBTI 궁합 분석기</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">성격 기반 궁합 추천 및 성격 요약</div>', unsafe_allow_html=True)
+st.markdown('<div class="title">🌟 MBTI 궁합 매칭기 🌟</div>', unsafe_allow_html=True)
+st.markdown('<div class="subtitle">당신의 성격과 어울리는 MBTI를 찾아드립니다.</div>', unsafe_allow_html=True)
 
-# 사용자 입력
-user_mbti = st.text_input("당신의 MBTI 유형을 입력해주세요 (예: INFP, ESTJ)", max_chars=4).upper()
+# 입력
+user_mbti = st.text_input("💡 MBTI를 입력해주세요 (예: INFP, ESTJ)", max_chars=4).upper()
 
 if user_mbti:
     if user_mbti in mbti_descriptions:
         st.markdown('<div class="box">', unsafe_allow_html=True)
 
-        # 성격 요약
-        st.markdown('<div class="header">성격 요약</div>', unsafe_allow_html=True)
+        st.markdown('<div class="header">🧠 성격 설명</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="mbti">{user_mbti}</div>', unsafe_allow_html=True)
         st.markdown(f'<div class="match">{mbti_descriptions[user_mbti]}</div>', unsafe_allow_html=True)
 
-        # 궁합
-        st.markdown('<div class="header">궁합이 잘 맞는 MBTI</div>', unsafe_allow_html=True)
+        st.markdown('<div class="header">💘 어울리는 MBTI</div>', unsafe_allow_html=True)
         for match in mbti_compatibility.get(user_mbti, []):
-            st.markdown(f'<div class="match">- {match}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="match">✔ {match}</div>', unsafe_allow_html=True)
 
         st.markdown('</div>', unsafe_allow_html=True)
-
-        st.markdown('<div class="footer">※ MBTI 궁합은 참고용입니다. 실제 관계는 개인의 성숙도와 소통에 따라 달라질 수 있습니다.</div>', unsafe_allow_html=True)
     else:
-        st.error("올바른 MBTI를 입력해주세요. 예: INFP, ESTJ, ENTP 등")
+        st.error("❌ 유효한 MBTI를 입력해주세요. 예: INFP, ENTP 등")
 else:
-    st.info("MBTI를 입력하면 결과가 표시됩니다.")
+    st.info("⌨️ 위에 MBTI를 입력하면 결과가 나타납니다.")
+
