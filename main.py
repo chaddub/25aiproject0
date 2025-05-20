@@ -21,7 +21,6 @@ mbti_jobs = {
     "ISFP": ["🖌️ 디자이너", "👩‍🍳 요리사", "📸 사진작가"],
     "ESTP": ["🗣️ 영업", "🚑 응급 구조사", "⚽ 스포츠 코치"],
     "ESFP": ["🎉 이벤트 플래너", "🎬 배우", "👗 패션 디자이너"]
-}
 
 # 🏠 앱 제목
 st.title("✨ MBTI로 알아보는 직업 추천기 🔍💼")
@@ -45,3 +44,47 @@ else:
 # 👋 하단 메시지
 st.markdown("---")
 st.markdown("Made with ❤️ using Streamlit | 즐거운 진로 탐색 되세요! 🧭")
+
+import streamlit as st
+
+# 페이지 설정
+st.set_page_config(page_title="💘 MBTI 궁합 매칭기", page_icon="💑", layout="centered")
+
+# MBTI 궁합 데이터 (간단 예시)
+mbti_compatibility = {
+    "INTJ": ["ENFP 🌈", "ENTP 🎯"],
+    "INTP": ["INFJ 🌸", "ENFJ 🌞"],
+    "ENTJ": ["INFP 🎨", "ISFP 🦋"],
+    "ENTP": ["INFJ 🕊️", "ISFJ 🍵"],
+    "INFJ": ["ENFP 💫", "INTP 🧠"],
+    "INFP": ["ENFJ 💐", "ESTJ 🛡️"],
+    "ENFJ": ["INFP ✨", "ISFP 🎶"],
+    "ENFP": ["INTJ 🧠", "INFJ 🌷"],
+    "ISTJ": ["ESFP 🎉", "ISFJ 🛏️"],
+    "ISFJ": ["ESFP 💃", "ESTP 🏍️"],
+    "ESTJ": ["INFP 🌼", "ESFJ 🍰"],
+    "ESFJ": ["ISFP 🐱", "ISFJ 🍵"],
+    "ISTP": ["ENFP 🎨", "ESFP 🕺"],
+    "ISFP": ["ENFJ 💐", "ESFJ 🍭"],
+    "ESTP": ["ISFJ 🧸", "INFP 🌼"],
+    "ESFP": ["ISTJ 🧱", "INFJ 📚"]
+}
+
+# 🎀 타이틀
+st.title("💘 MBTI 궁합 매칭기 💞")
+st.markdown("당신의 MBTI를 입력하면... 🧐 누구와 찰떡궁합인지 알려드려요! 💡")
+
+# ✍️ MBTI 입력
+user_mbti = st.text_input("💬 나의 MBTI를 입력해주세요 (예: INFP)", max_chars=4).upper()
+
+# 결과 출력
+if user_mbti:
+    if user_mbti in mbti_compatibility:
+        st.success(f"✨ {user_mbti}와 찰떡궁합인 MBTI는 바로바로...! 🥁")
+
+        # 궁합 MBTI 출력
+        for match in mbti_compatibility[user_mbti]:
+            st.markdown(f"- 💖 {match}")
+        
+        st.markdown("💑 *MBTI 궁합은 재미로 보*
+
